@@ -13,11 +13,11 @@
                         {!! Form::open(['route' => 'citas.store']) !!}
                         <div class="form-group">
                             {!! Form::label('fecha_hora', 'Fecha y hora de la cita') !!}
-
-
                             <input type="datetime-local" id="fecha_hora" name="fecha_hora" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d\Th:i')}}" />
-
-
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('localizacion', 'Lugar de la cita') !!}
+                            {!! Form::text('localizacion', null,['class'=> 'form-control', 'required', 'autofocus']) !!}
                         </div>
 
                         <div class="form-group">

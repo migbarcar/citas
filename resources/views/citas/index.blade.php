@@ -13,10 +13,14 @@
                         {!!   Form::submit('Crear cita', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
+
+
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Fecha</th>
+                                <th>Hora fin</th>
+                                <th>Lugar</th>
                                 <th>Medico</th>
                                 <th>Paciente</th>
                                 <th colspan="2">Acciones</th>
@@ -26,7 +30,9 @@
 
 
                                 <tr>
-                                    <td>{{ $cita->fecha_hora }}</td>
+                                    <td>{{ (new DateTime($cita->fecha_hora))->format('d-m-Y H:i:s') }}</td>
+                                    <td>{{ (new Datetime($cita->fecha_hora))->add (new DateInterval('PT15M'))->format ('d-m-Y H:i:s') }}</td>
+                                    <td>{{ $cita->localizacion }}</td>
                                     <td>{{ $cita->medico->full_name }}</td>
                                     <td>{{ $cita->paciente->full_name}}</td>
                                     <td>
@@ -47,4 +53,5 @@
                 </div>
             </div>
         </div>
+    </div>
 @endsection
