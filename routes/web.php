@@ -22,13 +22,13 @@ Route::resource('medicos', 'MedicoController');
 Route::resource('pacientes', 'PacienteController');
 
 
+
 Route::resource('citas', 'CitaController');
 
-
+Route::resource('enfermedades', 'EnfermedadController');
 
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-

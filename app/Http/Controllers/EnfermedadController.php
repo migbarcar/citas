@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Enfermedad;
+use App\Especialidad;
 use Illuminate\Http\Request;
-use App\Paciente;
 
-class PacienteController extends Controller
+use App\Enfermedad;
+
+class EnfermedadController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +21,10 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $enfermedades = Enfermedad::all();
 
-        $pacientes = Paciente::all();
+        return view('enfermedades/index',['enfermedades'=>$enfermedades]);
 
-        return view('pacientes/index',['pacientes'=>$pacientes]);
     }
 
     /**
@@ -35,9 +35,9 @@ class PacienteController extends Controller
     public function create()
     {
         //
-        $enfermedades = Enfermedad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->pluck('name','id');
 
-        return view('pacientes/create', ['enfermedades' =>$enfermedades]);
+        return view('enfermedades/create',['especialidades'=>$especialidades]);
 
     }
 
@@ -49,23 +49,17 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255',
-            'enfermedad_id' => 'required|exists:enfermedads,id'
+            'especialidad_id' => 'required|exists:especialidads,id'
         ]);
 
-        //TODO: crear validación propia para nuhsa
-        $paciente = new Paciente($request->all());
-        $paciente->save();
+        $enfermedad = new Enfermedad($request->all());
+        $enfermedad->save();
 
-        // return redirect('especialidades');
+        flash('Enfermedad creada correctamente');
 
-        flash('Paciente creado correctamente');
-
-        return redirect()->route('pacientes.index');
+        return redirect()->route('enfermedades.index');
     }
 
     /**
@@ -76,7 +70,7 @@ class PacienteController extends Controller
      */
     public function show($id)
     {
-        // TODO: Mostrar las citas de un paciente
+        //
     }
 
     /**
@@ -87,11 +81,14 @@ class PacienteController extends Controller
      */
     public function edit($id)
     {
-        $paciente = Paciente::find($id);
+        //
 
-        $enfermedades = Enfermedad::all()->pluck('name','id');
+        $enfermedad = Enfermedad::find($id);
 
-        return view('pacientes/edit',['paciente'=> $paciente , 'enfermedades' =>$enfermedades ]);
+        $especialidades = Especialidad::all()->pluck('name','id');
+
+
+        return view('enfermedades/edit',['enfermedad'=> $enfermedad, 'especialidades'=>$especialidades ]);
     }
 
     /**
@@ -105,21 +102,17 @@ class PacienteController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'surname' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255',
-            'enfermedad_id' => 'required|exists:enfermedads,id',
+            'especialidad_id' => 'required|exists:especialidads,id'
         ]);
 
-        $paciente = Paciente::find($id);
-        $paciente->fill($request->all());
+        $enfermedad = Enfermedad::find($id);
+        $enfermedad->fill($request->all());
 
-        $paciente->save();
+        $enfermedad->save();
 
-        flash('Paciente modificado correctamente');
+        flash('Enfermedad modificada correctamente');
 
-        return redirect()->route('pacientes.index');
-
-
+        return redirect()->route('enfermedades.index');
     }
 
     /**
@@ -130,10 +123,10 @@ class PacienteController extends Controller
      */
     public function destroy($id)
     {
-        $paciente = Paciente::find($id);
-        $paciente->delete();
-        flash('Paciente borrado correctamente');
+        $enfermedad = Enfermedad::find($id);
+        $enfermedad->delete();
+        flash('Enfermedad borrada correctamente');
 
-        return redirect()->route('pacientes.index');
+        return redirect()->route('enfermedades.index');
     }
 }
