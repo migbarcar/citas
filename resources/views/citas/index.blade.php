@@ -14,7 +14,6 @@
                         {!! Form::close() !!}
 
 
-
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>

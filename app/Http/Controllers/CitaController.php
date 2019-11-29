@@ -8,6 +8,7 @@ use App\Medico;
 use App\Paciente;
 
 
+
 class CitaController extends Controller
 {
 
@@ -22,12 +23,27 @@ class CitaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $citas = Cita::all();
+
+        $hoy= date('Y-m-d H:i:s');
+        $citas= Cita::where('fecha_hora','>', $hoy)->orderBy('fecha_hora','asc')->get();
 
         return view('citas/index',['citas'=>$citas]);
     }
+/*
+    public function citas_pasadas()
+    {
+
+        $hoy= date('Y-m-d H:i:s');
+        $citas= Cita::where('fecha_hora','<', $hoy)->orderBy('fecha_hora','asc')->get();
+
+
+        return view('citas/citas_pasadas',['citas'=>$citas]);
+    }
+*/
+
 
     /**
      * Show the form for creating a new resource.
@@ -140,5 +156,18 @@ class CitaController extends Controller
 
         return redirect()->route('citas.index');
     }
+
+
+    public function historial_citas()
+    {
+
+        $hoy = date ('d-m-Y H:i:s');
+        $citas= Cita::where('fecha_hora','<', $hoy)->get();
+
+
+        return view('citas/index',['citas'=>$citas]);
+    }
+
+
 
 }
