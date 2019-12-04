@@ -28,6 +28,8 @@ Route::resource('citas', 'CitaController');
 
 Route::resource('enfermedades', 'EnfermedadController');
 
+Route::resource('medicinas', 'MedicinaController');
+
 
 Auth::routes();
 
