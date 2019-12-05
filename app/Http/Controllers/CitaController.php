@@ -139,6 +139,7 @@ class CitaController extends Controller
             flash('Cita modificada correctamente');
         }else{
             flash('La cita no se puede celebrar. Intente con otro medico.');
+
         }
 
         return redirect()->route('citas.index');

@@ -8,6 +8,7 @@ use App\Especialidad;
 use App\Medico;
 use Illuminate\Http\Request;
 use App\Paciente;
+use phpDocumentor\Reflection\Types\Integer;
 
 class PacienteController extends Controller
 {
@@ -141,47 +142,17 @@ class PacienteController extends Controller
         return redirect()->route('pacientes.index');
     }
 
-    /*
-    public function pacientes_especialidad( Request $request){
-        $especialidad = Especialidad::all()->pluck('name','id');
-        $especialidad=Especialidad::find($id);
-
-        $especialidad = Especialidad::find('id');
-
-        $this->validate($request, [
-
-            'enfermedad_id' => 'required|exists:enfermedads,id',
-        ]);
-
-        $especialidad = Especialidad::find($id);
+        public function pacientes_especialidad(Especialidad $especialidad){
 
 
-        $enfermedad = Enfermedad::where('especialidad_id','=',$especialidad);
+        $id_de_la_especialidad=$especialidad->id;
 
+        $enfermedad = Enfermedad::where('especialidad_id','=', $id_de_la_especialidad)->value('id');
         $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();
 
 
         return view('pacientes/pacientes_especialidad',['pacientes'=>$pacientes]);
 
     }
-    */
-
-
-    public function pacientes_especialidad(){
-        /*
-        $this->validate($request,[
-            'especialidad_id'=>'required|exists:especialidads,id',
-        ]);
-        */
-        /*
-        $especialidad=Especialidad::find($id);
-        $enfermedad = Enfermedad::where('especialidad_id','=',$especialidad)->select('id')->get();
-        $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();*/
-
-        $pacientes = Paciente::where('id','=',5);
-        return view('pacientes/pacientes_especialidad',['pacientes'=>$pacientes]);
-
-    }
-
 
 }
