@@ -134,6 +134,7 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+
     {
         $paciente = Paciente::find($id);
         $paciente->delete();
