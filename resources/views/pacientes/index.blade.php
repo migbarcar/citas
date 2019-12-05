@@ -13,6 +13,11 @@
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
+                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad', 'method' => 'get']) !!}
+                        {!!   Form::submit('Ver Pacientes x Especialidad', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
+
+
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -44,7 +49,9 @@
 
                                     </td>
                                 </tr>
+
                             @endforeach
+
                         </table>
                     </div>
                 </div>

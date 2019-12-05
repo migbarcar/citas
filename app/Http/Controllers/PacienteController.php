@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use App\Enfermedad;
+use App\Especialidad;
+use App\Medico;
 use Illuminate\Http\Request;
 use App\Paciente;
 
@@ -13,6 +16,7 @@ class PacienteController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +26,9 @@ class PacienteController extends Controller
     {
         //
 
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::all()->sortBy('surname');
 
-        return view('pacientes/index',['pacientes'=>$pacientes]);
+        return view('pacientes/index', ['pacientes' => $pacientes]);
     }
 
     /**
@@ -35,16 +39,16 @@ class PacienteController extends Controller
     public function create()
     {
         //
-        $enfermedades = Enfermedad::all()->pluck('name','id');
+        $enfermedades = Enfermedad::all()->pluck('name', 'id');
 
-        return view('pacientes/create', ['enfermedades' =>$enfermedades]);
+        return view('pacientes/create', ['enfermedades' => $enfermedades]);
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -71,7 +75,7 @@ class PacienteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -82,23 +86,23 @@ class PacienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $paciente = Paciente::find($id);
 
-        $enfermedades = Enfermedad::all()->pluck('name','id');
+        $enfermedades = Enfermedad::all()->pluck('name', 'id');
 
-        return view('pacientes/edit',['paciente'=> $paciente , 'enfermedades' =>$enfermedades ]);
+        return view('pacientes/edit', ['paciente' => $paciente, 'enfermedades' => $enfermedades]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -125,7 +129,7 @@ class PacienteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -136,4 +140,48 @@ class PacienteController extends Controller
 
         return redirect()->route('pacientes.index');
     }
+
+    /*
+    public function pacientes_especialidad( Request $request){
+        $especialidad = Especialidad::all()->pluck('name','id');
+        $especialidad=Especialidad::find($id);
+
+        $especialidad = Especialidad::find('id');
+
+        $this->validate($request, [
+
+            'enfermedad_id' => 'required|exists:enfermedads,id',
+        ]);
+
+        $especialidad = Especialidad::find($id);
+
+
+        $enfermedad = Enfermedad::where('especialidad_id','=',$especialidad);
+
+        $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();
+
+
+        return view('pacientes/pacientes_especialidad',['pacientes'=>$pacientes]);
+
+    }
+    */
+
+
+    public function pacientes_especialidad(){
+        /*
+        $this->validate($request,[
+            'especialidad_id'=>'required|exists:especialidads,id',
+        ]);
+        */
+        /*
+        $especialidad=Especialidad::find($id);
+        $enfermedad = Enfermedad::where('especialidad_id','=',$especialidad)->select('id')->get();
+        $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();*/
+
+        $pacientes = Paciente::where('id','=',5);
+        return view('pacientes/pacientes_especialidad',['pacientes'=>$pacientes]);
+
+    }
+
+
 }

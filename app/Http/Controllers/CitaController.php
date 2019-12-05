@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Enfermedad;
 use App\Cita;
 use App\Medico;
 use App\Paciente;
@@ -65,10 +66,17 @@ class CitaController extends Controller
         ]);
 
         $cita = new Cita($request->all());
-        $cita->save();
 
+        $id_de_la_especialidad_del_medico=$cita->medico->especialidad_id;
+        $id_de_la_enfermedad = $cita->paciente->enfermedad_id;
+        $id_de_la_especialidad_enfermedad=Enfermedad::where('id','=',$id_de_la_enfermedad)->value('especialidad_id');
 
-        flash('Cita creada correctamente');
+        if($id_de_la_especialidad_del_medico == $id_de_la_especialidad_enfermedad){
+            $cita->save();
+            flash('Cita creada correctamente');
+        }else{
+            flash('La cita no se puede celebrar. Intente con otro medico.');
+        }
 
         return redirect()->route('citas.index');
     }
@@ -100,7 +108,6 @@ class CitaController extends Controller
 
         $pacientes = Paciente::all()->pluck('full_name','id');
 
-
         return view('citas/edit',['cita'=> $cita, 'medicos'=>$medicos, 'pacientes'=>$pacientes]);
     }
 
@@ -123,9 +130,16 @@ class CitaController extends Controller
         $cita = Cita::find($id);
         $cita->fill($request->all());
 
-        $cita->save();
+        $id_de_la_especialidad_del_medico=$cita->medico->especialidad_id;
+        $id_de_la_enfermedad = $cita->paciente->enfermedad_id;
+        $id_de_la_especialidad_enfermedad=Enfermedad::where('id','=',$id_de_la_enfermedad)->value('especialidad_id');
 
-        flash('Cita modificada correctamente');
+        if($id_de_la_especialidad_del_medico == $id_de_la_especialidad_enfermedad){
+            $cita->save();
+            flash('Cita modificada correctamente');
+        }else{
+            flash('La cita no se puede celebrar. Intente con otro medico.');
+        }
 
         return redirect()->route('citas.index');
     }
