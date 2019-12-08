@@ -143,6 +143,9 @@ class PacienteController extends Controller
         return redirect()->route('pacientes.index');
     }
 
+
+
+
         public function pacientes_especialidad(Especialidad $especialidad){
 
 

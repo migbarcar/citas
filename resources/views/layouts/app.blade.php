@@ -88,6 +88,12 @@
                                         Citas
                                     </a>
                                 </li>
+
+                                <li>
+                                    <a href="{{ url('/tratamientos') }}">
+                                        Tratamientos
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
