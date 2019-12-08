@@ -26,6 +26,7 @@ class TratamientoController extends Controller
         return view('tratamientos/index',['tratamientos'=>$tratamientos]);
     }
 
+
     public function create()
     {
         $medicos = Medico::all()->pluck('full_name','id');
