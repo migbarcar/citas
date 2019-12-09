@@ -44,7 +44,7 @@
                                     </td>
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.destroy',$paciente->id], 'method' => 'delete']) !!}
-                                        {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("Se borrarán tambien las citas asociadas a este paciente. ¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
 
                                     </td>

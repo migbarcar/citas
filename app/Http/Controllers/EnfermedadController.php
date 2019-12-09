@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Especialidad;
+use App\Paciente;
 use Illuminate\Http\Request;
 
 use App\Enfermedad;
@@ -125,9 +126,20 @@ class EnfermedadController extends Controller
     {
         $enfermedad = Enfermedad::find($id);
 
-        $enfermedad->delete();
-        flash('Enfermedad borrada correctamente');
+        $paciente = Paciente::where('enfermedad_id','=',$id)->value('enfermedad_id');
+
+        if($paciente){
+
+            flash('Existe algun paciente con esta enfermedad. Revise los datos.');
+
+        }else{
+
+            $enfermedad->delete();
+            flash('Enfermedad borrada correctamente');
+        }
+
 
         return redirect()->route('enfermedades.index');
+
     }
 }
