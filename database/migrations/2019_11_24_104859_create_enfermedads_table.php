@@ -20,7 +20,7 @@ class CreateEnfermedadsTable extends Migration
             $table->unsignedInteger('especialidad_id');
             $table->timestamps();
 
-            $table->foreign('especialidad_id')->references('id')->on('especialidads')->onDelete('cascade');
+            $table->foreign('especialidad_id')->references('id')->on('especialidads')->onDelete('restrict');
 
         });
     }
