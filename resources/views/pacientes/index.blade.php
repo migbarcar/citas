@@ -13,6 +13,16 @@
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
+                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad']) !!}
+                        <div class="form-group">
+                            {!!Form::label('especialidad_id', 'Especialidad') !!}
+                            <br>
+                            {!! Form::select('especialidad_id', $especialidades, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::close() !!}
+
+
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -39,12 +49,14 @@
                                     </td>
                                     <td>
                                         {!! Form::open(['route' => ['pacientes.destroy',$paciente->id], 'method' => 'delete']) !!}
-                                        {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("Se borrarán tambien las citas asociadas a este paciente. ¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
 
                                     </td>
                                 </tr>
+
                             @endforeach
+
                         </table>
                     </div>
                 </div>

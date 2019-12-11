@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Especialidad;
+use App\Medico;
 
 
 class EspecialidadController extends Controller
@@ -25,7 +27,7 @@ class EspecialidadController extends Controller
         //
 
 
-        $especialidades = Especialidad::all();
+        $especialidades = Especialidad::all()->sortBy('name');
 
         return view('especialidades/index')->with('especialidades', $especialidades);
 
@@ -123,8 +125,19 @@ class EspecialidadController extends Controller
     public function destroy($id)
     {
         $especialidad = Especialidad::find($id);
-        $especialidad->delete();
-        flash('Especialidad borrada correctamente');
+
+        $medico = Medico::where('especialidad_id','=',$id)->value('especialidad_id');
+
+        if($medico){
+
+            flash('Existe algun medico con esta especialidad. Revise los datos.');
+
+        }else{
+
+            $especialidad->delete();
+            flash('Especialidad borrada correctamente');
+        }
+
 
         return redirect()->route('especialidades.index');
     }
