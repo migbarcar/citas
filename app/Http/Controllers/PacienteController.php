@@ -145,14 +145,15 @@ class PacienteController extends Controller
     }
 
 
-        public function pacientes_especialidad(Request $request){
+    public function pacientes_especialidad(Request $request){
         $especialidad_id = $request->especialidad_id;
-        $enfermedad = Enfermedad::where('especialidad_id','=', $especialidad_id)->value('id');
-        $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();
 
+        $pacientes=Paciente::join('enfermedads', 'pacientes.enfermedad_id', '=','enfermedads.id')
+                           ->join('especialidads','enfermedads.especialidad_id','=','especialidads.id')-> where ('enfermedads.especialidad_id','=',$especialidad_id)
+                           ->select('pacientes.name','pacientes.surname','pacientes.nuhsa','pacientes.enfermedad_id')->get();
 
         return view('pacientes/pacientes_especialidad',['pacientes'=>$pacientes]);
 
-    }
+}
 
 }
