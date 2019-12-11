@@ -144,6 +144,7 @@ class PacienteController extends Controller
         return redirect()->route('pacientes.index');
     }
 
+
         public function pacientes_especialidad(Request $request){
         $especialidad_id = $request->especialidad_id;
         $enfermedad = Enfermedad::where('especialidad_id','=', $especialidad_id)->value('id');
