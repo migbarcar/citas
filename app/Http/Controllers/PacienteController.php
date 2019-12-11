@@ -28,8 +28,9 @@ class PacienteController extends Controller
         //
 
         $pacientes = Paciente::all()->sortBy('surname');
+        $especialidades = Especialidad::all()->pluck('name','id');
 
-        return view('pacientes/index', ['pacientes' => $pacientes]);
+        return view('pacientes/index', ['pacientes' => $pacientes, 'especialidades'=>$especialidades]);
     }
 
     /**
@@ -143,15 +144,9 @@ class PacienteController extends Controller
         return redirect()->route('pacientes.index');
     }
 
-
-
-
-        public function pacientes_especialidad(Especialidad $especialidad){
-
-
-        $id_de_la_especialidad=$especialidad->id;
-
-        $enfermedad = Enfermedad::where('especialidad_id','=', $id_de_la_especialidad)->value('id');
+        public function pacientes_especialidad(Request $request){
+        $especialidad_id = $request->especialidad_id;
+        $enfermedad = Enfermedad::where('especialidad_id','=', $especialidad_id)->value('id');
         $pacientes = Paciente::where('enfermedad_id','=', $enfermedad)->select('name','surname','nuhsa','enfermedad_id')->get();
 
 

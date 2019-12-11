@@ -13,8 +13,13 @@
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad', 'method' => 'get']) !!}
-                        {!!   Form::submit('Ver Pacientes x Especialidad', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad']) !!}
+                        <div class="form-group">
+                            {!!Form::label('especialidad_id', 'Especialidad') !!}
+                            <br>
+                            {!! Form::select('especialidad_id', $especialidades, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
                         {!! Form::close() !!}
 
 
