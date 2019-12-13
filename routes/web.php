@@ -24,7 +24,7 @@ Route::resource('especialidades', 'EspecialidadController');
 Route::resource('medicos', 'MedicoController');
 Route::resource('pacientes', 'PacienteController');
 
-
+Route::resource('prescripciones', 'PrescripcionController');
 
 Route::resource('citas', 'CitaController');
 

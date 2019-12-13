@@ -20,4 +20,9 @@ class Tratamiento extends Model
         return $this->belongsTo('App\Paciente');
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->paciente()->name.' '.$this->paciente()->surname;
+    }
+
 }

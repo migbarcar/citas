@@ -20,7 +20,7 @@ class MedicinaController extends Controller
      */
     public function index()
     {
-        $medicinas = medicina::all();
+        $medicinas = medicina::all()->sortBy('name');;
 
         return view('medicinas/index',['medicinas'=>$medicinas]);
     }
@@ -53,7 +53,6 @@ class MedicinaController extends Controller
         $medicina = new medicina($request->all());
         $medicina->save();
 
-        // return redirect('especialidades');
 
         flash('Medicina creada correctamente');
 
