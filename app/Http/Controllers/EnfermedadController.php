@@ -22,7 +22,7 @@ class EnfermedadController extends Controller
      */
     public function index()
     {
-        $enfermedades = Enfermedad::all()->sortBy('especialidad_id');
+        $enfermedades = Enfermedad::all()->sortBy('name');
 
         return view('enfermedades/index',['enfermedades'=>$enfermedades]);
 
@@ -36,7 +36,7 @@ class EnfermedadController extends Controller
     public function create()
     {
         //
-        $especialidades = Especialidad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->sortBy('name')->pluck('name','id');
 
         return view('enfermedades/create',['especialidades'=>$especialidades]);
 
@@ -86,7 +86,7 @@ class EnfermedadController extends Controller
 
         $enfermedad = Enfermedad::find($id);
 
-        $especialidades = Especialidad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->sortBy('name')->pluck('name','id');
 
 
         return view('enfermedades/edit',['enfermedad'=> $enfermedad, 'especialidades'=>$especialidades ]);

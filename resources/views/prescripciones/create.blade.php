@@ -26,9 +26,9 @@
                         </div>
 
                         <div class="form-group">
-                            {!!Form::label('tratamiento_id', 'Tratamiento') !!}
+                            {!!Form::label('paciente_id', 'Tratamiento para') !!}
                             <br>
-                            {!! Form::select('tratamiento_id', $tratamientos, ['class' => 'form-control']) !!}
+                            {!! Form::select('paciente_id', $pacientes, ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!!Form::label('medicina_id', 'Medicina') !!}

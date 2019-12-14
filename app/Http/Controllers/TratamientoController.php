@@ -22,16 +22,17 @@ class TratamientoController extends Controller
 
         $hoy= date('Y-m-d H:i:s');
         $tratamientos= Tratamiento::where('fecha_fin','>', $hoy)->orderBy('fecha_fin','asc')->get();
+        $pacientes = Paciente::all()->pluck('surname','id');
 
-        return view('tratamientos/index',['tratamientos'=>$tratamientos]);
+        return view('tratamientos/index',['tratamientos'=>$tratamientos,'pacientes' => $pacientes]);
     }
 
 
     public function create()
     {
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
 
 
         return view('tratamientos/create',['medicos'=>$medicos, 'pacientes'=>$pacientes]);
@@ -67,9 +68,9 @@ class TratamientoController extends Controller
         $tratamiento = Tratamiento::find($id);
 
 
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
 
         return view('tratamientos/edit',['tratamiento'=> $tratamiento, 'medicos'=>$medicos, 'pacientes'=>$pacientes]);
     }
@@ -102,4 +103,16 @@ class TratamientoController extends Controller
 
         return redirect()->route('tratamientos.index');
     }
+
+    public function tratamiento_paciente(Request $request){
+        $paciente_id = $request->paciente_id;
+
+        $tratamientos=Tratamiento::join('pacientes', 'tratamientos.paciente_id','=','pacientes.id')
+                           -> where ('tratamientos.paciente_id','=',$paciente_id)
+                           ->select('tratamientos.fecha_inicio','tratamientos.fecha_fin','tratamientos.descripcion','tratamientos.medico_id')->get();
+
+
+        return view('tratamientos/tratamiento_paciente',['tratamientos'=>$tratamientos]);
+    }
+
 }

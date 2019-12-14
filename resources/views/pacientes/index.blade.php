@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-9 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Pacientes</div>
 
@@ -12,18 +12,19 @@
                         {!! Form::open(['route' => 'pacientes.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        <br>
 
-                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad']) !!}
-                        <div class="form-group">
+                        {!! Form::open(['route' => 'pacientes.pacientes_especialidad','method' => 'post']) !!}
+
                             {!!Form::label('especialidad_id', 'Especialidad') !!}
-                            <br>
-                            {!! Form::select('especialidad_id', $especialidades, ['class' => 'form-control', 'required']) !!}
-                        </div>
+
+                            {!! Form::select('especialidad_id',$especialidades, ['class' => 'form-control', 'required']) !!}
+
                         {!! Form::submit('Buscar',['class'=>'btn-primary btn']) !!}
                         {!! Form::close() !!}
 
 
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>

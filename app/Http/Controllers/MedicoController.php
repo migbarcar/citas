@@ -36,7 +36,7 @@ class MedicoController extends Controller
     public function create()
     {
         //
-        $especialidades = Especialidad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->sortBy('name')->pluck('name','id');
 
         return view('medicos/create',['especialidades'=>$especialidades]);
 
@@ -88,7 +88,7 @@ class MedicoController extends Controller
 
         $medico = Medico::find($id);
 
-        $especialidades = Especialidad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->sortBy('name')->pluck('name','id');
 
 
         return view('medicos/edit',['medico'=> $medico, 'especialidades'=>$especialidades ]);

@@ -28,7 +28,7 @@ class PacienteController extends Controller
         //
 
         $pacientes = Paciente::all()->sortBy('surname');
-        $especialidades = Especialidad::all()->pluck('name','id');
+        $especialidades = Especialidad::all()->sortBy('name')->pluck('name','id');
 
         return view('pacientes/index', ['pacientes' => $pacientes, 'especialidades'=>$especialidades]);
     }
@@ -41,7 +41,7 @@ class PacienteController extends Controller
     public function create()
     {
         //
-        $enfermedades = Enfermedad::all()->pluck('name', 'id');
+        $enfermedades = Enfermedad::all()->sortBy('name')->pluck('name', 'id');
 
         return view('pacientes/create', ['enfermedades' => $enfermedades]);
 

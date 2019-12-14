@@ -3,16 +3,16 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-9 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Citas</div>
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'citas.create', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => 'citas.create', 'method' => 'get','class'=>'inline-important']) !!}
                         {!!   Form::submit('Crear cita', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-                        {!! Form::open(['route' => 'citas.muestra_historial_citas', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => 'citas.muestra_historial_citas', 'method' => 'get','class'=>'inline-important']) !!}
                         {!!   Form::submit('Historial citas', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 

@@ -41,9 +41,9 @@ class CitaController extends Controller
      */
     public function create()
     {
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
 
 
         return view('citas/create',['medicos'=>$medicos, 'pacientes'=>$pacientes]);
@@ -104,9 +104,9 @@ class CitaController extends Controller
         $cita = Cita::find($id);
 
 
-        $medicos = Medico::all()->pluck('full_name','id');
+        $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
-        $pacientes = Paciente::all()->pluck('full_name','id');
+        $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
 
         return view('citas/edit',['cita'=> $cita, 'medicos'=>$medicos, 'pacientes'=>$pacientes]);
     }

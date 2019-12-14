@@ -30,7 +30,7 @@ class PrescripcionController extends Controller
     {
 
 
-        $prescripciones=Prescripcion::all();
+        $prescripciones=Prescripcion::all()->sortBy('tratamiento_id');;
 
         return view('prescripciones/index',['prescripciones'=>$prescripciones]);
     }
@@ -43,11 +43,11 @@ class PrescripcionController extends Controller
     public function create()
     {
         $tratamientos = Tratamiento::all()->pluck('paciente_id','id');
+        $pacientes = Paciente::all()->sortBy('surname')->pluck('surname','id');
+        $medicinas = Medicina::all()->sortBy('name')->pluck('name','id');
 
-        $medicinas = Medicina::all()->pluck('name','id');
 
-
-        return view('prescripciones/create',['tratamientos'=>$tratamientos, 'medicinas'=>$medicinas]);
+        return view('prescripciones/create',['tratamientos'=>$tratamientos, 'medicinas'=>$medicinas,'pacientes'=>$pacientes]);
     }
 
     /**
@@ -98,8 +98,7 @@ class PrescripcionController extends Controller
 
         $tratamientos = Tratamiento::all()->pluck('paciente_id','id');
 
-
-        $medicinas = Medicina::all()->pluck('name','id');
+        $medicinas = Medicina::all()->sortBy('name')->pluck('name','id');
 
         return view('prescripciones/edit',['prescripcion'=> $prescripcion, 'tratamientos'=>$tratamientos, 'medicinas'=>$medicinas]);
     }
