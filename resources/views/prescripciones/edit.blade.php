@@ -32,6 +32,12 @@
                             {!! Form::select('medicina_id', $medicinas, $prescripcion->medicina_id, ['class' => 'form-control']) !!}
                         </div>
 
+                        <div class="form-group">
+                            {!!Form::label('tratamiento_id', 'Tratamientos') !!}
+                            <br>
+                            {!! Form::select('tratamiento_id', $tratamientos, $prescripcion->tratamiento_id, ['class' => 'form-control']) !!}
+                        </div>
+
 
                         <div class="form-group">
                             {!! Form::label('dosis', 'Dosis') !!}

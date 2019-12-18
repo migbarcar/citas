@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-11 col-md-offset-0">
+            <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
                     <div class="panel-heading">Tratamientos</div>
 
@@ -18,7 +18,8 @@
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
                                 <th>Paciente</th>
                                 <th>Medico</th>
                                 <th>Descripcion</th>
@@ -29,6 +30,8 @@
                             @foreach ($tratamientos as $tratamiento)
 
                                 <tr>
+                                    <td>{{ (new DateTime($tratamiento->fecha_inicio))->format('d-m-Y H:i:s') }}</td>
+                                    <td>{{ (new DateTime($tratamiento->fecha_fin))->format('d-m-Y H:i:s') }}</td>
                                     <td>{{ $tratamiento->paciente->full_name }}</td>
                                     <td>{{ $tratamiento->medico->full_name }}</td>
                                     <td>{{ $tratamiento->descripcion }}</td>
@@ -44,9 +47,9 @@
 
                                     </td>
                                     <td>
-                                         {!! Form::open(['route' => 'prescripciones.create', 'method' => 'get']) !!}
-                                         {!!   Form::submit('Crear prescripcion', ['class'=> 'btn btn-primary'])!!}
-                                         {!! Form::close() !!}
+                                        {!! Form::open(['route' => ['prescripciones.create',$tratamiento->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Crear prescripcion', ['class'=> 'btn btn-primary'])!!}
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
 

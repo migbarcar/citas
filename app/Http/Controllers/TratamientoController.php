@@ -38,6 +38,8 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'fecha_inicio' => 'required|date|after:now',
+            'fecha_fin' => 'required|date|after:now',
             'medico_id' => 'required|exists:medicos,id',
             'paciente_id' => 'required|exists:pacientes,id',
             'descripcion' => 'required|max:255',
@@ -72,6 +74,8 @@ class TratamientoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'fecha_inicio' => 'required|date|after:now',
+            'fecha_fin' => 'required|date|after:now',
             'medico_id' => 'required|exists:medicos,id',
             'paciente_id' => 'required|exists:pacientes,id',
             'descripcion' => 'required|max:255',

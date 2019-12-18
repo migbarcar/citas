@@ -12,6 +12,18 @@
 
                         {!! Form::open( [ 'route' => ['prescripciones.store']]) !!}
 
+
+
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Descripcion</th>
+
+                            </tr>
+
+
+                        </table>
+
                         <div class="form-group">
                             {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
                             <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d\Th:i')}}" />
@@ -21,10 +33,11 @@
                             <input type="datetime-local" id="fecha_fin" name="fecha_fin" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d\Th:i')}}" />
                         </div>
                         <div class="form-group">
-                            {!!Form::label('medicina_id', 'Medicina') !!}
+                            {!!Form::label('medicina_id', 'Medicamento') !!}
                             <br>
                             {!! Form::select('medicina_id', $medicinas, ['class' => 'form-control']) !!}
                         </div>
+
                         <div class="form-group">
                             {!! Form::label('dosis', 'Dosis') !!}
                             {!! Form::text('dosis', null,['class'=> 'form-control', 'required', 'autofocus']) !!}

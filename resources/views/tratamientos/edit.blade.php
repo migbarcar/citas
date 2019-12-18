@@ -12,7 +12,19 @@
 
                         {!! Form::model($tratamiento, [ 'route' => ['tratamientos.update',$tratamiento->id], 'method'=>'PUT']) !!}
 
+                        <div class="form-group">
+                            {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
 
+                            <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{(new DateTime($tratamiento->fecha_inicio))->format('Y-m-d\TH:i')}}" />
+
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('fecha_fin', 'Fecha Fin') !!}
+
+                            <input type="datetime-local" id="fecha_fin" name="fecha_fin" class="form-control" value="{{(new DateTime($tratamiento->fecha_fin))->format('Y-m-d\TH:i')}}" />
+
+                        </div>
 
 
                         <div class="form-group">

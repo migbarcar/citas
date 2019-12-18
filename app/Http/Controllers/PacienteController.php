@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Cita;
 use App\Enfermedad;
 use App\Especialidad;
+use App\medicina;
 use App\Medico;
+use App\Tratamiento;
 use Illuminate\Http\Request;
 use App\Paciente;
 use phpDocumentor\Reflection\Types\Integer;
@@ -156,4 +158,4 @@ class PacienteController extends Controller
 
 }
 
-}
+    }
