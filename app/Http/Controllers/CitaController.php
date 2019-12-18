@@ -103,7 +103,6 @@ class CitaController extends Controller
 
         $cita = Cita::find($id);
 
-
         $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
         $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');

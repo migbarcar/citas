@@ -10,8 +10,21 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'prescripciones.store']) !!}
+                        {!! Form::open( [ 'route' => ['prescripciones.store']]) !!}
 
+                        <div class="form-group">
+                            {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
+                            <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d\Th:i')}}" />
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('fecha_fin', 'Fecha Fin') !!}
+                            <input type="datetime-local" id="fecha_fin" name="fecha_fin" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d\Th:i')}}" />
+                        </div>
+                        <div class="form-group">
+                            {!!Form::label('medicina_id', 'Medicina') !!}
+                            <br>
+                            {!! Form::select('medicina_id', $medicinas, ['class' => 'form-control']) !!}
+                        </div>
                         <div class="form-group">
                             {!! Form::label('dosis', 'Dosis') !!}
                             {!! Form::text('dosis', null,['class'=> 'form-control', 'required', 'autofocus']) !!}
@@ -25,16 +38,7 @@
                             {!! Form::text('instrucciones', null,['class'=> 'form-control', 'required', 'autofocus']) !!}
                         </div>
 
-                        <div class="form-group">
-                            {!!Form::label('paciente_id', 'Tratamiento para') !!}
-                            <br>
-                            {!! Form::select('paciente_id', $pacientes, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!!Form::label('medicina_id', 'Medicina') !!}
-                            <br>
-                            {!! Form::select('medicina_id', $medicinas, ['class' => 'form-control']) !!}
-                        </div>
+
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

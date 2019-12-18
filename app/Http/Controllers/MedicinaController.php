@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\medicina;
+use App\prescripcion;
 use Illuminate\Http\Request;
 
 class MedicinaController extends Controller
@@ -118,8 +119,18 @@ class MedicinaController extends Controller
     public function destroy($id)
     {
         $medicina = medicina::find($id);
-        $medicina->delete();
-        flash('Medicina borrada correctamente');
+
+        $prescripcion = Prescripcion::where('medicina_id','=',$id)->value('medicina_id');
+
+        if($prescripcion){
+
+            flash('Existe alguna prescripcion con este medicamento. Revise los datos.');
+
+        }else{
+
+            $medicina->delete();
+            flash('Medicina borrada correctamente');
+        }
 
         return redirect()->route('medicinas.index');
     }

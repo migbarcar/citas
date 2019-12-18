@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTratamientosTable extends Migration
+class CreateTratamientosV2Table extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,9 @@ class CreateTratamientosTable extends Migration
     {
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_fin');
-            $table->string('descripcion');
             $table->unsignedInteger('paciente_id');
             $table->unsignedInteger('medico_id');
+            $table->string('descripcion');
             $table->timestamps();
 
             $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('restrict');

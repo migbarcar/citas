@@ -8,12 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescripcion extends Model
 {
-    protected $fillable = ['dosis', 'frecuencia', 'instrucciones','tratamiento_id','medicina_id'];
+    protected $fillable = ['fecha_inicio','fecha_fin','medicina_id','dosis', 'frecuencia', 'instrucciones'];
 
-    public function tratamiento()
-    {
-        return $this->belongsTo('App\Tratamiento');
-    }
 
     public function medicina()
     {

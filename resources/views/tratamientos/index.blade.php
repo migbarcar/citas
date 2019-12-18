@@ -9,33 +9,29 @@
 
                     <div class="panel-body">
                         @include('flash::message')
+
+
                         {!! Form::open(['route' => 'tratamientos.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary'])!!}
+                        {!!   Form::submit('Crear Tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-
-
 
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Fin</th>
-                                <th>Medico</th>
+
                                 <th>Paciente</th>
+                                <th>Medico</th>
                                 <th>Descripcion</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
 
                             </tr>
 
                             @foreach ($tratamientos as $tratamiento)
 
                                 <tr>
-                                    <td>{{ (new DateTime($tratamiento->fecha_inicio))->format('d-m-Y  H:i:s') }}</td>
-                                    <td>{{ (new DateTime($tratamiento->fecha_fin))->format ('d-m-Y  H:i:s') }}</td>
+                                    <td>{{ $tratamiento->paciente->full_name }}</td>
                                     <td>{{ $tratamiento->medico->full_name }}</td>
-                                    <td>{{ $tratamiento->paciente->full_name}}</td>
                                     <td>{{ $tratamiento->descripcion }}</td>
-
                                     <td>
                                         {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
@@ -47,7 +43,11 @@
                                         {!! Form::close() !!}
 
                                     </td>
-
+                                    <td>
+                                         {!! Form::open(['route' => 'prescripciones.create', 'method' => 'get']) !!}
+                                         {!!   Form::submit('Crear prescripcion', ['class'=> 'btn btn-primary'])!!}
+                                         {!! Form::close() !!}
+                                    </td>
                                 </tr>
 
                             @endforeach

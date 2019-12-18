@@ -12,6 +12,25 @@
 
                         {!! Form::model($prescripcion, [ 'route' => ['prescripciones.update',$prescripcion->id], 'method'=>'PUT']) !!}
 
+                        <div class="form-group">
+                            {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
+
+                            <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{(new DateTime($prescripcion->fecha_inicio))->format('Y-m-d\TH:i')}}" />
+
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('fecha_fin', 'Fecha Fin') !!}
+
+                            <input type="datetime-local" id="fecha_fin" name="fecha_fin" class="form-control" value="{{(new DateTime($prescripcion->fecha_fin))->format('Y-m-d\TH:i')}}" />
+
+                        </div>
+
+                        <div class="form-group">
+                            {!!Form::label('medicina_id', 'Medicinas') !!}
+                            <br>
+                            {!! Form::select('medicina_id', $medicinas, $prescripcion->medicina_id, ['class' => 'form-control']) !!}
+                        </div>
 
 
                         <div class="form-group">
@@ -29,16 +48,6 @@
                             {!! Form::text('instrucciones',$prescripcion->instrucciones,['class'=>'form-control', 'required', 'autofocus']) !!}
                         </div>
 
-                        <div class="form-group">
-                            {!!Form::label('tratamiento_id', 'Tratamiento') !!}
-                            <br>
-                            {!! Form::select('tratamiento_id', $tratamientos, $prescripcion->tratamiento_id, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!!Form::label('medicina_id', 'Medicinas') !!}
-                            <br>
-                            {!! Form::select('medicina_id', $medicinas, $prescripcion->medicina_id, ['class' => 'form-control']) !!}
-                        </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

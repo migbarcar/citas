@@ -20,18 +20,15 @@ class TratamientoController extends Controller
     public function index()
     {
 
-        $hoy= date('Y-m-d H:i:s');
-        $tratamientos= Tratamiento::where('fecha_fin','>', $hoy)->orderBy('fecha_fin','asc')->get();
-        $pacientes = Paciente::all()->pluck('surname','id');
+        $tratamientos = Tratamiento::all();
 
-        return view('tratamientos/index',['tratamientos'=>$tratamientos,'pacientes' => $pacientes]);
+        return view('tratamientos/index',['tratamientos'=>$tratamientos]);
     }
 
 
     public function create()
     {
         $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
-
         $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
 
 
@@ -41,8 +38,6 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'fecha_inicio' => 'required|date|after:now',
-            'fecha_fin' => 'required|date|after:now',
             'medico_id' => 'required|exists:medicos,id',
             'paciente_id' => 'required|exists:pacientes,id',
             'descripcion' => 'required|max:255',
@@ -67,7 +62,6 @@ class TratamientoController extends Controller
 
         $tratamiento = Tratamiento::find($id);
 
-
         $medicos = Medico::all()->sortBy('surname')->pluck('full_name','id');
 
         $pacientes = Paciente::all()->sortBy('surname')->pluck('full_name','id');
@@ -78,8 +72,6 @@ class TratamientoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'fecha_inicio' => 'required|date|after:now',
-            'fecha_fin' => 'required|date|after:now',
             'medico_id' => 'required|exists:medicos,id',
             'paciente_id' => 'required|exists:pacientes,id',
             'descripcion' => 'required|max:255',

@@ -15,9 +15,7 @@
                         <div class="form-group">
                             {!! Form::label('fecha_hora', 'Fecha y hora de la cita') !!}
 
-
                             <input type="datetime-local" id="fecha_hora" name="fecha_hora" class="form-control" value="{{(new DateTime($cita->fecha_hora))->format('Y-m-d\TH:i')}}" />
-
 
                         </div>
 

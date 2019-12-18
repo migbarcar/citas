@@ -29,8 +29,8 @@ class PrescripcionController extends Controller
     public function index()
     {
 
+        $prescripciones= Prescripcion::all();
 
-        $prescripciones=Prescripcion::all()->sortBy('tratamiento_id');;
 
         return view('prescripciones/index',['prescripciones'=>$prescripciones]);
     }
@@ -40,14 +40,13 @@ class PrescripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
-        $tratamientos = Tratamiento::all()->pluck('paciente_id','id');
-        $pacientes = Paciente::all()->sortBy('surname')->pluck('surname','id');
         $medicinas = Medicina::all()->sortBy('name')->pluck('name','id');
 
-
-        return view('prescripciones/create',['tratamientos'=>$tratamientos, 'medicinas'=>$medicinas,'pacientes'=>$pacientes]);
+        return view('prescripciones/create',['medicinas'=>$medicinas]);
     }
 
     /**
@@ -59,11 +58,12 @@ class PrescripcionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'fecha_inicio' => 'required|date|after:now',
+            'fecha_fin' => 'required|date|after:now',
+            'medicina_id' => 'required|exists:medicinas,id',
             'dosis' => 'required|max:255',
             'frecuencia' => 'required|max:255',
             'instrucciones' => 'required|max:255',
-            'tratamiento_id' => 'required|exists:tratamientos,id',
-            'medicina_id' => 'required|exists:medicinas,id',
 
         ]);
 
@@ -71,7 +71,7 @@ class PrescripcionController extends Controller
         $prescripcion->save();
         flash('Prescripcion creada correctamente');
 
-        return redirect()->route('prescripciones.index');
+        return redirect()->route('tratamientos.index');
     }
 
     /**
@@ -96,11 +96,9 @@ class PrescripcionController extends Controller
 
         $prescripcion = Prescripcion::find($id);
 
-        $tratamientos = Tratamiento::all()->pluck('paciente_id','id');
-
         $medicinas = Medicina::all()->sortBy('name')->pluck('name','id');
 
-        return view('prescripciones/edit',['prescripcion'=> $prescripcion, 'tratamientos'=>$tratamientos, 'medicinas'=>$medicinas]);
+        return view('prescripciones/edit',['prescripcion'=> $prescripcion, 'medicinas'=>$medicinas]);
     }
 
     /**
@@ -113,11 +111,12 @@ class PrescripcionController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'fecha_inicio' => 'required|date|after:now',
+            'fecha_fin' => 'required|date|after:now',
+            'medicina_id' => 'required|exists:medicinas,id',
             'dosis' => 'required|max:255',
             'frecuencia' => 'required|max:255',
             'instrucciones' => 'required|max:255',
-            'tratamiento_id' => 'required|exists:tratamientos,id',
-            'medicina_id' => 'required|exists:medicinas,id',
 
         ]);
         $prescripcion = Prescripcion::find($id);

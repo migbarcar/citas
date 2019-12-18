@@ -31,8 +31,7 @@
                                 <th>Apellidos</th>
                                 <th>Nuhsa</th>
                                 <th>Enfermedad</th>
-
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($pacientes as $paciente)
@@ -54,6 +53,7 @@
                                         {!! Form::close() !!}
 
                                     </td>
+
                                 </tr>
 
                             @endforeach
