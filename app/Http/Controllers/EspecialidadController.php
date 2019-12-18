@@ -125,7 +125,6 @@ class EspecialidadController extends Controller
     public function destroy($id)
     {
         $especialidad = Especialidad::find($id);
-
         $medico = Medico::where('especialidad_id','=',$id)->value('especialidad_id');
 
         if($medico){
