@@ -141,11 +141,22 @@ class EspecialidadController extends Controller
         return redirect()->route('especialidades.index');
     }
 
-    public function destroyAll()
-    {
-        Especialidad::truncate();
-        flash('Todas las especialidades borradas correctamente');
+    public function destroyAll(){
+
+        $medico=Medico::join('especialidads', 'medico.especialidad_id','=','especialidad.id');
+
+        if($medico){
+
+            flash('Existe algun medico con alguna especialidad. Revise los datos');
+
+        }else{
+
+            Especialidad::truncate();
+            flash('Todas las especialidades borradas correctamente');
+        }
 
         return redirect()->route('especialidades.index');
+
     }
+
 }

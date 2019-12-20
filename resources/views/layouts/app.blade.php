@@ -71,7 +71,6 @@
                                     </a>
                                 </li>
 
-
                                 <li>
                                     <a href="{{ url('/pacientes') }}">
                                         Pacientes

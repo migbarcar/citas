@@ -10,19 +10,26 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open( [ 'route' => ['prescripciones.store']]) !!}
-
 
 
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Paciente</th>
                                 <th>Descripcion</th>
-
                             </tr>
 
+                            @foreach ( (array)$tratamientos as $tratamiento)
 
+                                <tr>
+                                    <td>{{ $tratamiento->paciente->full_name }}</td>
+                                    <td>{{ $tratamiento->descripcion }}</td>
+                                </tr>
+
+                            @endforeach
+                            {!! Form::close() !!}
                         </table>
+
+                        {!! Form::open( [ 'route' => ['prescripciones.store']]) !!}
 
                         <div class="form-group">
                             {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
